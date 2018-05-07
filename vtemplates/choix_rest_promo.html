@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>EasyMenu -> Accueil</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+	<link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/style2.css" rel="stylesheet" type="text/css" />
+         
+        <script type="text/javascript" src="../js/cufon-yui.js"></script>
+        <script type="text/javascript" src="../js/cufon-replace.js"></script>  
+        <script type="text/javascript" src="../js/AvantGarde_Bk_BT_400.font.js"></script> 
+	<script type="text/javascript" src="../js/bascule_deux_listes.js"></script> 
+        
+        
+        
+         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        
+        
+         <script>
+            $(document).ready(function() {
+                //$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ]);
+                $( "#datepicker" ).datepicker({                        
+                        beforeShowDay: nonWorkingDates,
+                        minDate: '+1d',                        
+                        yearRange: 'c:c+1',
+                        monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jui','Juil','Aou','Sep','Oct','Nov','Dec'],
+                        dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                        firstDay: 1,
+                        changeMonth: true,
+			changeYear: true,
+                        currentText: 'Now',
+                        dateFormat: 'dd/mm/yy',
+			showOn: "both",
+			buttonImage: "../images/calendar_icon.png",
+			buttonImageOnly: true
+		});
+                
+                function nonWorkingDates(date){
+                    var day = date.getDay(), Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6;                    
+                    var closedDays = [[Sunday], [Saturday]];
+                    for (var i = 0; i < closedDays.length; i++) {
+                        if (day == closedDays[i][0]) {
+                            return [false];
+                        }
+                    }                  
+                    return [true];
+                }
+
+                
+            });
+            
+            
+            
+            
+            
+        </script>
+        
+        
+        
+        
+        
+        
+<!--VTP_mainZone-->        
+        <script type="text/javascript">
+            <!--
+            function changeZone(){
+                var zoneOption = document.getElementById("priceZone");
+                var optionIndex = zoneOption.options[zoneOption.selectedIndex].value;                
+                window.location.href = "choix_zone_de_prix.php?zoneIndex="+optionIndex+"{#js_get}";               
+            }
+            // -->
+        </script>
+</head>
+<div id="wrapper">
+	<div id="subwrapper">
+		<div id="contenu" style="width:990px; margin: 0 auto; margin-top: 5px;">
+			<div id="entete" style="height: 85px; width: 990px;">                          
+                            <div class="lang" style="text-align: right;">  
+                                <!--a href=""><img src="../images/fr.png" alt="Fran&ccedil;ais"/></a>
+                                <a href=""><img src="../images/gb.png" alt="English"/></a>
+                                <a href=""><img src="../images/es.png" alt="Espa&ntilde;ol"/></a-->
+                            </div>
+                            <div class="sto_title">{#operationTitle} des promotions (choix des {#typePromo})</div>
+                            <div style="text-align: left; float:left; width:495px;"><a href="accueil.php">Accueil</a> <img src="../images/suivant.gif" alt=">" style="margin-top: 4px;"/> <a href="choix_type_promos.php{#actionGet}&typePromo={#typePromoGet}">Type de gestion ({#typePromo})</a><!--VTP_historyZone--> <img src="../images/suivant.gif" alt=">" style="margin-top: 4px;"/> <a href="history.php?action={#action}&typePromo={#typePromoGet}">Historique</a><!--/VTP_historyZone--> <img src="../images/suivant.gif" alt=">" style="margin-top: 4px;"/> <span style="color: #f1870d;">Choix des {#typePromo}</span></div>
+                            <div style="text-align: right; float:left; width:495px;">
+                                <div style="float:right; margin-left: 5px; padding-top: 3px;">
+                                    <a href="accueil.php?action=deconnect">
+                                    <img src="../images/logout_icon.gif" alt="d&eacute;connexion1"/> 
+                                    </a>
+                                </div>
+                                <div class="user_title" style="float:right;">{#prenom_nom}</div>                             
+                                <div style="clear: both;"></div>
+                            </div>
+                            <div style="clear: both;"></div>
+			</div>
+			<div id="page">
+                            <div class="box6">
+                                <div class="left-border">
+                                    <div class="right-border">
+                                        <div class="bot-border">
+                                            <div class="left-top">
+                                                <div class="right-top">
+                                                    <div class="left-bot">
+                                                        <div class="right-bot">
+                                                            <div style="padding:10px 0;">                                                                                                                                                                                                     
+                                                                <div style="margin-bottom: 20px;">
+                                                                    <!--form name="choix_attribution" method="post" OnSubmit="javascript: soumettre_1liste( document.forms[0].selected_elements );" action="choix_attributions.php"-->
+                                                                    <form name="choix_attribution" method="post" OnSubmit="javascript: soumettre_1liste( this.form.selected_elements );" action="choix_attributions.php">
+                                                                        
+                                                                        <input type="hidden" name="action" value="{#action}"/>
+                                                                        <input type="hidden" name="typePromo" value="{#typePromoGet}"/>
+                                                                        <input type="hidden" name="history" value="{#history}"/>
+                                                                        
+                                                                        <div style=" margin-right: 50px; margin-bottom: 40px;">
+                                                                            <div style="float:right;">
+                                                                                <input type="text" id="datepicker" name="date_modif" size="10" style="margin-right: 10px;"/>
+                                                                            </div>
+                                                                            <div style="float:right; margin: 2px 20px; 0 0">
+                                                                                Modification prévue pour le
+                                                                            </div>
+                                                                            <div style="clear:both;">
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                    <div style="width: 700px; margin: 0 auto;">
+                                                                     <div style="float:left;">                                                                         
+                                                                        <div style="text-align: left; height: 30px;">
+                                                                            {#titre_liste1}<!--Liste des restaurants disponibles -->
+                                                                        </div>
+                                                                        <div style="padding-top: 20px;">
+                                                                            <select id="availabe_elements" name="availabe_elements[]" style="width: 260px;" multiple="multiple" size="12" OnDblClick="javascript: deplacer( this.form.availabe_elements, this.form.selected_elements );">
+                                                                                {#availabe_elements_options}                                                                               
+                                                                            </select>
+                                                                        </div>
+                                                                     </div>
+                                                                     <div style="float:left; text-align: center; vertical-align: middle; padding-top: 120px; width: 180px;">
+                                                                         <input type="button" value=" > " OnClick="javascript: deplacer( this.form.availabe_elements, this.form.selected_elements );"/><br/><br/>
+                                                                         <input type="button" value=" < " OnClick="javascript: deplacer( this.form.selected_elements, this.form.availabe_elements );"/>    
+                                                                     </div>        
+                                                                     <div style="float:right;">
+                                                                        <div style="text-align: left; height: 30px;">
+                                                                            {#titre_liste2}<!--Restaurants selection&acute;es-->
+                                                                        </div>
+                                                                     
+                                                                         <div style="padding-top: 20px;">
+                                                                            <select id="selected_elements" name="selected_elements[]" style="width: 260px;" multiple="multiple" size="12" OnDblClick="javascript: deplacer( this.form.selected_elements, this.form.availabe_elements );">
+                                                                                 {#selected_elements_options}                                                                                
+                                                                            </select>
+                                                                        </div>
+                                                                     </div>
+                                                                     <div style="clear:both;">
+                                                                     </div>
+                                                                  </div>
+                                                                  <div style="margin-top: 30px;">                                                                    
+                                                                    <!--input type="button" value="    Valider    " style="margin-top: 20px; margin-right: 10px;" OnClick="document.forms['choix_attribution'].submit()"-->
+                                                                    <input type="button" value="    Valider    " style="margin-top: 20px; margin-right: 10px;" OnClick="javascript : valider_elements('{#element}','datepicker');">    
+                                                                    <!--input type="submit" value="    Valider    " style="margin-top: 20px; margin-right: 10px;"-->    
+                                                                    <input type="button" value="    Annuler    " style="margin-top: 20px;" onClick="home();">
+                                                                  </div>
+                                                                </form>
+                                                            </div>                                                                                                                                                                                                                                                                                                                             
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>         
+                            </div>                                                                                                          
+			</div>			
+			<!--div id="pied" style="height: 10px; width: 990px; background-color: #00f;">
+				{#pied}
+			</div-->
+		</div>
+	</div>
+</div>
+</div>
+<!--/VTP_mainZone-->	
+</body>
+</html>

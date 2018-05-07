@@ -1,0 +1,43 @@
+* {	margin:0; padding:0; font-size:100%;}
+
+.auth_title { font-size: 1.5em; text-align: center; padding:5px 0; border:0px solid red; border-bottom-width: 0px;}
+ 
+.auth_fields { padding:10px; border:0px solid red;}
+
+.libelle, .field { float:left;}
+
+.field input {width: 200px; background-color: #fff; border: 1px solid #bbb; height: 16px;}
+
+.libelle { width:100px; font-weight: bold; font-size: 1.15em; padding-top: 2px;}
+
+.line { padding:3px 0 3px 0;}
+
+.buttons_line { padding:6px 0 0 0; float:right; margin-right:5px;}
+
+.yum_title {font-size:1.554em; font-weight:normal; color:#2f4a85; display:block; margin-bottom:15px; text-align: center;}
+.user_title {font-size:1.155em; font-weight:normal; color:#2f4a85; display:block;}
+
+/*
+td{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height:15px;
+   
+}
+
+tr{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    
+}
+
+tr .dfg {
+    height:10px;
+    font-size: 0.2em;
+}
+
+td .dfg {
+    height:10px;
+   
+}
+*/

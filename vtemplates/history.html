@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>EasyMenu -> Accueil</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+	<link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/style2.css" rel="stylesheet" type="text/css" />
+         
+        <script type="text/javascript" src="../js/cufon-yui.js"></script>
+        <script type="text/javascript" src="../js/cufon-replace.js"></script>  
+        <script type="text/javascript" src="../js/AvantGarde_Bk_BT_400.font.js"></script> 
+	<script src="../js/functions.js" type="text/javascript"></script>
+<!--VTP_mainZone-->        
+        <script type="text/javascript">
+            <!--
+            function changeZone(){
+                var zoneOption = document.getElementById("priceZone");
+                var optionIndex = zoneOption.options[zoneOption.selectedIndex].value;                
+                window.location.href = "choix_zone_de_prix.php?zoneIndex="+optionIndex+"{#js_get}";               
+            }
+            // -->
+        </script>
+</head>
+<div id="wrapper">
+	<div id="subwrapper">
+		<div id="contenu" style="width:990px; margin: 0 auto; margin-top: 5px;">
+			<div id="entete" style="height: 85px; width: 990px;">                          
+                            <div class="lang" style="text-align: right;">  
+                                <!--a href=""><img src="../images/fr.png" alt="Fran&ccedil;ais"/></a>
+                                <a href=""><img src="../images/gb.png" alt="English"/></a>
+                                <a href=""><img src="../images/es.png" alt="Espa&ntilde;ol"/></a-->
+                            </div>
+                            <div class="sto_title">{#operationTitle} des promotions (historique des modifications)</div>
+                            <div style="text-align: left; float:left; width:495px;"><a href="accueil.php">Accueil</a> <img src="../images/suivant.gif" alt=">" style="margin-top: 4px;"/> <a href="choix_type_promos.php{#actionGet}&typePromo={#typePromoGet}">Type de gestion ({#typePromo})</a> <img src="../images/suivant.gif" alt=">" style="margin-top: 4px;"/> <span style="color: #f1870d;">Historique</span></div>
+                            <div style="text-align: right; float:left; width:495px;">
+                                <div style="float:right; margin-left: 5px; padding-top: 3px;">
+                                    <a href="accueil.php?action=deconnect">
+                                    <img src="../images/logout_icon.gif" alt="d&eacute;connexion1"/> 
+                                    </a>
+                                </div>
+                                <div class="user_title" style="float:right;">{#prenom_nom}</div>                             
+                                <div style="clear: both;"></div>
+                            </div>
+                            <div style="clear: both;"></div>
+			</div>
+			<div id="page">
+                            <div class="box6">
+                                <div class="left-border">
+                                    <div class="right-border">
+                                        <div class="bot-border">
+                                            <div class="left-top">
+                                                <div class="right-top">
+                                                    <div class="left-bot">
+                                                        <div class="right-bot">
+                                                            <div style="padding:50px 0;">                                                                  
+                                                                <form id="historyForm" action="history.php" method="post">
+                                                                    <input type="hidden" name="typePromo" value="{#typePromo}"/>   
+                                                                    <input type="hidden" name="action" value="{#actionHidden}"/>
+                                                                <div style="margin-bottom: 20px;">                                                                 
+                                                                     <FIELDSET style="width:400px; margin: 0 auto;">
+                                                                          <LEGEND style="font-weight: bold;">&nbsp;Historique des modifications&nbsp;</LEGEND>
+                                                                                {#history_list}
+                                                                     </FIELDSET>
+                                                                   
+                                                                    <FIELDSET style="width:400px; height: 50px; margin: 0 auto; margin-top: 20px;">
+                                                                          <LEGEND style="font-weight: bold;">&nbsp;Nouvelle modification&nbsp;</LEGEND>
+                                                                          <a href="choix_rest_promo.php?action={#action}&typePromo={#typePromoGet}">Gerer des nouvelles promotions</a>
+                                                                     </FIELDSET>
+                                                                    
+                                                                </div>                                                                                                                                
+                                                                </form>                                                                                                                                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>         
+                            </div>                                                                                                          
+			</div>			
+			<!--div id="pied" style="height: 10px; width: 990px; background-color: #00f;">
+				{#pied}
+			</div-->
+		</div>
+	</div>
+</div>
+</div>
+<!--/VTP_mainZone-->	
+</body>
+</html>

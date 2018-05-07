@@ -1,0 +1,9 @@
+body {font-family: Arial, Tahoma; font-size: 11px;}
+
+#wrapper { width:990px; margin:0 auto; text-align:left;}
+
+#content { width:370px; margin:0 auto; margin-top: 200px; text-align:left;}
+
+#header {height:160px;}
+
+#footer { height:100px;}

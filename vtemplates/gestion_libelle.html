@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>EasyMenu -> Accueil</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+	<link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/style2.css" rel="stylesheet" type="text/css" />
+        <link href="../css/calendar.css" rel="stylesheet" type="text/css" /> 
+        
+        <script type="text/javascript" src="../js/cufon-yui.js"></script>
+        <script type="text/javascript" src="../js/cufon-replace.js"></script>  
+        <script type="text/javascript" src="../js/AvantGarde_Bk_BT_400.font.js"></script> 
+	<script type="text/javascript" src="../js/bascule_deux_listes.js"></script>
+  
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>                
+        
+        <script>
+            $(document).ready(function() {
+            //$(function() {
+                //$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ]);
+                $( "#datepicker" ).datepicker({
+                        beforeShowDay: nonWorkingDates,
+                        minDate: '+1d',                        
+                        yearRange: 'c:c+1',
+                        monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jui','Juil','Aou','Sep','Oct','Nov','Dec'],
+                        dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                        firstDay: 1,
+                        changeMonth: true,
+			changeYear: true,
+                        currentText: 'Now',
+                        dateFormat: 'dd/mm/yy',
+			//showOn: "button",
+                        showOn: "both",
+			buttonImage: "../images/calendar_icon.png",
+			buttonImageOnly: true
+		});
+                
+                function nonWorkingDates(date){
+                    var day = date.getDay(), Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6;                    
+                    var closedDays = [[Sunday], [Saturday]];
+                    for (var i = 0; i < closedDays.length; i++) {
+                        if (day == closedDays[i][0]) {
+                            return [false];
+                        }
+                    }                  
+                    return [true];
+                }
+
+                
+            });
+            
+            
+            
+            
+            
+        </script>
+        
+        
+        
+        <script type="text/javascript">
+            <!--
+            
+            var global_old_value;
+            
+            
+            function sauvegarder(date_modif){
+                //alert('je suis ici');
+                if(date_modif.length > 0){
+                    //alert('je suis ici1');
+                    if (confirm("Vous avez déja une modification prévu pour le "+date_modif+".\n Voulez vous l'ecraser?")){
+                        document.forms['priceForm'].action = "valider_enregistrement.php?saveit=ok";
+                        document.forms['priceForm'].submit();
+                    }
+                }else{
+                    //alert('je suis ici2');
+                    document.forms['priceForm'].action = "valider_enregistrement.php";
+                    document.forms['priceForm'].submit();
+                }
+            }
+
+            function appliquer(date_modif){
+                if(date_modif.length > 0){
+                    if (confirm("Vous avez déja une modification prévu pour le "+date_modif+".\n Voulez vous l'ecraser?")){
+                        //document.forms['priceForm'].action = "valider_enregistrement.php";
+                        document.forms['priceForm'].submit();
+                    }
+                }else{
+                    //document.forms['priceForm'].action = "valider_enregistrement.php";
+                    document.forms['priceForm'].submit();
+                }
+            }
+            
+            function changeZone(){
+                var zoneOption = document.getElementById("priceZone");
+                var optionIndex = zoneOption.options[zoneOption.selectedIndex].value;                
+                window.location.href = "consultation_prix.php?zoneIndex="+optionIndex;               
+            }
+            
+            function max_value(a,b,c){
+                return Math.max(a,b,c);
+            }
+            
+            function min_value(a,b,c){
+                return Math.min(a,b,c);
+            }
+            
+            function priceInRange(value,min,max){
+                if((value > min) && (value < max)){
+                    return true;
+                }else{
+                    return false;
+                }        
+            }
+            
+            function save_old(id){
+                global_old_value = document.getElementById(id).value;                 
+            }
+            
+            function validate_libelle(id){                
+                 var text_obj = document.getElementById(id);
+                 var new_value = text_obj.value;                               
+                 
+                 if(!((global_old_value == new_value) || (new_value.length == 0))){                                           
+                      var reg = new RegExp('^[a-zA-Z0-9 ,.]+$','i');                                           
+                      
+                      if(!(reg.test(new_value))){
+                        alert("Veuillez saisir une chaine alphanumerique"); 
+                        document.getElementById(id).value = global_old_value; 
+                      }
+                  }                                  
+            }
+            
+            
+            function validate_price(prix_bronze,prix_silver,prix_gold,pourcentage_modif,id){               
+                var text_obj = document.getElementById(id);                 
+                var new_value = text_obj.value;  
+               
+                if(!(global_old_value == new_value)){
+                    if (new_value == parseFloat(new_value)){
+                        var max_val = max_value(prix_bronze,prix_silver,prix_gold)*(1+(0.01*pourcentage_modif));
+                        var min_val = min_value(prix_bronze,prix_silver,prix_gold)*(1-(0.01*pourcentage_modif));                
+                        if(!priceInRange(new_value,min_val,max_val)){
+                            alert("prix en dehors des "+pourcentage_modif+"% autorisé");
+                            document.getElementById(id).value = global_old_value;                       
+                        } 
+
+                         // formater les nombres               
+                        var text_obj = document.getElementById(id).value;                
+                        if(text_obj.length != 0) {                  
+                            var float_val = parseFloat(text_obj);                  
+                            document.getElementById(id).value = float_val.toFixed(2);                    
+                        } 
+                     }else{
+                       alert("veuillez saisir un nombre"); 
+                       document.getElementById(id).value = global_old_value; 
+                    } 
+                }                                       
+            }
+            
+            // -->
+        </script>
+</head>
+<body>
+<!--VTP_mainZone-->
+<div id="wrapper">
+	<div id="subwrapper">
+		<div id="contenu" style="width:990px; margin: 0 auto; margin-top: 5px;">
+			<div id="entete" style="height: 85px; width: 990px;">                                                                                                                                                                        
+                            <div class="lang" style="text-align: right;">  
+                                <!--a href=""><img src="../images/fr.png" alt="Fran&ccedil;ais"/></a>
+                                <a href=""><img src="../images/gb.png" alt="English"/></a>
+                                <a href=""><img src="../images/es.png" alt="Espa&ntilde;ol"/></a-->
+                            </div>
+                            <div class="sto_title">Gestion des libell&eacute;s</div>                            
+                            <div style="text-align: left; float:left; width:495px;"><a href="accueil.php">Accueil</a> <img src="../images/suivant.gif" alt=">" style="margin-top: 4px;"/> <span style="color: #f1870d;">Gestion des libell&eacute;s</span></div>
+                            <div style="text-align: right; float:left; width:495px;">
+                                <div style="float:right; margin-left: 5px; padding-top: 3px;">
+                                    <a href="accueil.php?action=deconnect">
+                                    <img src="../images/logout_icon.gif" alt="d&eacute;connexion1"/> 
+                                    </a>
+                                </div>
+                                <div class="user_title" style="float:right;">{#prenom_nom}</div>                             
+                                <div style="clear: both;"></div>
+                            </div>
+                            <div style="clear: both;"></div>
+			</div>
+			<div id="page">
+                            <div class="box6">
+                                <div class="left-border">
+                                    <div class="right-border">
+                                        <div class="bot-border">
+                                            <div class="left-top">
+                                                <div class="right-top">
+                                                    <div class="left-bot">
+                                                        <div class="right-bot">
+                                                            <div style="padding:5px 0; padding-bottom: 20px;"> 
+                                                                 <form id="libelleForm" action="valider_enregistrement_libelle.php" method="post">
+                                                                    <input type="hidden" name="zoneIndex" value="{#zoneIndex}">
+                                                                    <input type="hidden" name="priceZoneNum" value="{#priceZoneNum}">
+                                                                
+                                                                <div style="border: 0px #f00 solid; margin: 10px; text-align: left; float:right;">
+                                                                    Date de la modification : <input type="text" id="datepicker" name="date_modif" value="{#date_modif}" style=" margin-right: 10px; 17px;"/> 
+                                                                </div>                                                                
+                                                                <!--div style="float:right; padding:10px 20px 0 0;">
+                                                                    <form id="equity_info" action="valider_date.php" method="post">
+                                                                        <input type="radio" name="equity_info" onClick="" checked> Prix actuels <input type="radio" name="equity_info" onClick=""> Prix futurs
+                                                                    </form>
+                                                                </div-->
+                                                                <div style="clear: both;"></div>
+                                                                <div class="sto_title" style="border: 0px #f00 solid; margin: 10px; padding:3px; background-color: darkblue;"><span style="color: #fff; font-weight: bold; font-size: 1.2em;">A LA CARTE</span></div>                                                                
+                                                                
+                                                                
+                                                                <!--VTP_itemCategorieZone-->
+                                                                <table cellspacing="0" cellpadding="0" style="margin: 0 10px; border-collapse : collapse; margin-top: 18px;">
+                                                                    <tr>
+                                                                        <td style="background-color: #fff; width: 200px; vertical-align: top; text-align: left;">
+                                                                             <div class="user_title" style="font-size: 1.135em; margin-left: 5px;">{#categorie}</div>
+                                                                        </td>
+                                                                        <td valign="top">                                                                             
+                                                                            <table cellspacing="0" cellpadding="0" style="border-collapse : collapse; margin-left: 4px;">
+                                                                                <tr>
+                                                                                    <th style="width:157px; border: 1px solid black; color: #fff; background-color: #aaa;">Ancien libell&eacute;</th>                                                                                    
+                                                                                    <th style="width:157px; border: 1px solid black; color: #fff; background-color: #aaa;">Nouveau libell&eacute;</th>
+                                                                                    <th style="width:85px; border: 1px solid black; color: #fff; background-color: #aaa;">Prix actuel</th>
+                                                                                    <th style="width:3px;"></th>
+                                                                                    <th style="width:121px; border: 1px solid black; color: #fff; background-color: #aaa;">Bronze</th>
+                                                                                    <th style="width:121px; border: 1px solid black; color: #fff; background-color: #aaa;">Silver</th>
+                                                                                    <th style="width:121px; border: 1px solid black; color: #fff; background-color: #aaa;">Gold</th>
+                                                                                </tr>
+                                                                                <!--VTP_itemZone-->
+                                                                                <tr style="font-size: 1em;">
+                                                                                    <td style=" border: 1px solid black; text-align: left; padding-left: 3px;">{#libelle}</td>
+                                                                                    
+                                                                                    <td style=" border: 1px solid black; height: 20px;" align="center">
+                                                                                        <input type="text" name="post_nouveau_libelle_{#mi_seq}" id="nouveau_libelle_{#mi_seq}" maxlength="16" value="{#nouveau_libelle}" style="text-align:left; vertical-align: middle; border: 1px solid #aaa; width:130px; height: 17px;" onBlur="validate_libelle('nouveau_libelle_{#mi_seq}');" onFocus="save_old('nouveau_libelle_{#mi_seq}');" />
+                                                                                        <input type="hidden" name="post_mi_seq_{#mi_seq}" value="{#mi_seq}"/>
+                                                                                        <input type="hidden" name="post_obj_num_{#mi_seq}" value="{#obj_num}"/>
+                                                                                        <input type="hidden" name="post_name_1_{#mi_seq}" value="{#libelle}"/>
+                                                                                        <input type="hidden" name="post_type_{#mi_seq}" value="carte"/>
+                                                                                    </td>
+                                                                                    <td style=" border: 1px solid black; font-weight: bold;" align="center">{#prix_actuel}</td>
+                                                                                    <td></td>
+                                                                                    <td style=" border: 1px solid black;" align="center">{#prix_bronze}</td>
+                                                                                    <td style=" border: 1px solid black;" align="center">{#prix_silver}</td>
+                                                                                    <td style=" border: 1px solid black;" align="center">{#prix_gold}</td>
+                                                                                </tr>
+                                                                                <!--/VTP_itemZone-->
+                                                                            </table>                                                                                                                                                        
+                                                                        </td>
+                                                                    </tr>    
+                                                                </table>
+                                                                <!--/VTP_itemCategorieZone-->
+                                                                <div class="sto_title" style="border: 0px #f00 solid; margin: 10px; padding:3px; background-color: darkblue;"><span style="color: #fff; font-weight: bold; font-size: 1.2em;">MENUS</span></div>
+                                                                <!--VTP_menuCategorieZone-->
+                                                                 <table style="margin: 0 10px; border-collapse : collapse; margin-top: 18px;">
+                                                                    <tr>
+                                                                        <td style="background-color: #fff; width: 200px; vertical-align: top; text-align: left;">
+                                                                             <div class="user_title" style="font-size: 1.135em; margin-left: 5px;">{#categorie}</div>
+                                                                        </td>
+                                                                        <td valign="top">                                                                            
+                                                                            <table cellspacing="0" cellpadding="0" style="border-collapse : collapse; margin-left: 4px;">
+                                                                                <tr>
+                                                                                    <th style="width:157px; border: 1px solid black; color: #fff; background-color: #aaa;">Ancien libell&eacute;</th>                                                                                    
+                                                                                    <th style="width:157px; border: 1px solid black; color: #fff; background-color: #aaa;">Nouveau libell&eacute;</th>
+                                                                                    <th style="width:85px; border: 1px solid black; color: #fff; background-color: #aaa;">Prix actuel</th>
+                                                                                    <th style="width:3px;"></th>
+                                                                                    <th style="width:121px; border: 1px solid black; color: #fff; background-color: #aaa;">Bronze</th>
+                                                                                    <th style="width:121px; border: 1px solid black; color: #fff; background-color: #aaa;">Silver</th>
+                                                                                    <th style="width:121px; border: 1px solid black; color: #fff; background-color: #aaa;">Gold</th>
+                                                                                </tr>
+                                                                                <!--VTP_menuZone-->
+                                                                                <tr style="font-size: 1em;">
+                                                                                    <td style=" border: 1px solid black; text-align: left; padding-left: 3px;">{#libelle}</td>
+                                                                                    
+                                                                                    <td style=" border: 1px solid black; height: 20px;" align="center">
+                                                                                        <input type="text" name="post_nouveau_libelle_{#mi_seq}" id="nouveau_libelle_{#mi_seq}" maxlength="16" value="{#nouveau_libelle}" style="text-align:left; vertical-align: middle; border: 1px solid #aaa; width:130px; height: 17px;" onBlur="validate_libelle('nouveau_libelle_{#mi_seq}');" onFocus="save_old('nouveau_libelle_{#mi_seq}');" />
+                                                                                        <input type="hidden" name="post_mi_seq_{#mi_seq}" value="{#mi_seq}"/>
+                                                                                        <input type="hidden" name="post_obj_num_{#mi_seq}" value="{#obj_num}"/>
+                                                                                        <input type="hidden" name="post_name_1_{#mi_seq}" value="{#libelle}"/>
+                                                                                        <input type="hidden" name="post_type_{#mi_seq}" value="menu"/>
+                                                                                    </td>
+                                                                                    <td style=" border: 1px solid black; font-weight: bold;" align="center">{#prix_actuel}</td>
+                                                                                    <td></td>
+                                                                                    <td style=" border: 1px solid black;" align="center">{#prix_bronze}</td>
+                                                                                    <td style=" border: 1px solid black;" align="center">{#prix_silver}</td>
+                                                                                    <td style=" border: 1px solid black;" align="center">{#prix_gold}</td>
+                                                                                </tr>
+                                                                                <!--/VTP_menuZone-->
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>    
+                                                                </table>
+                                                                <!--/VTP_menuCategorieZone-->                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                <div>
+                                                            </div>
+                                                                <input type="button" value="    Sauvegarder les modifications    " style="margin-top: 20px; margin-right: 10px;" OnClick="valider_date('datepicker','{#date_modif}')"/>                                                                
+                                                                <input type="button" value="    Annuler    " style="margin-top: 20px;" onClick="home();"/>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>         
+                            </div>                                                                                                          
+			</div>			
+			<!--div id="pied" style="height: 10px; width: 990px; background-color: #00f;">
+				{#pied}
+			</div-->
+		</div>
+	</div>
+</div>
+</div>
+<!--/VTP_mainZone-->	
+</body>
+</html>
